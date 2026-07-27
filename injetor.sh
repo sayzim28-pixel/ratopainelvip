@@ -1,8 +1,15 @@
 #!/bin/bash
 
-DATA_VALIDADE=20260730
+# ==========================================
+# CONFIGURAÇÃO DE VALIDADE DO PAINEL
+# ==========================================
+# Coloque a data limite no formato AAAAMMDD (Ano, Mês, Dia)
+DATA_VALIDADE=20260730  # Exemplo: Expira dia 30 de Julho de 2026
+
+# Pega a data atual do celular no mesmo formato (AAAAMMDD)
 DATA_ATUAL=$(date +%Y%m%d)
 
+# Trava se a data atual for maior que a validade
 if [ "$DATA_ATUAL" -gt "$DATA_VALIDADE" ]; then
     clear
     echo "=========================================="
@@ -10,10 +17,12 @@ if [ "$DATA_ATUAL" -gt "$DATA_VALIDADE" ]; then
     echo "=========================================="
     echo " [!] Este painel expirou!"
     echo " [!] Aguarde o desenvolvedor atualizar"
+    echo "     o painel para liberar o acesso."
     echo "=========================================="
     exit 1
 fi
 
+# Se estiver dentro da validade, o painel abre normalmente:
 su -c "setenforce 0" > /dev/null 2>&1
 
 while true; do
